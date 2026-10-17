@@ -1,0 +1,93 @@
+ Container mongodb-homework-m3-1 Running 
+ Container mongodb-homework-m1-1 Running 
+ Container mongodb-homework-m2-1 Running 
+ Container mongodb-homework-m3-1 Waiting 
+ Container mongodb-homework-m1-1 Waiting 
+ Container mongodb-homework-m2-1 Waiting 
+ Container mongodb-homework-m1-1 Healthy 
+ Container mongodb-homework-m3-1 Healthy 
+ Container mongodb-homework-m2-1 Healthy 
+ Container mongodb-homework-init-1 Starting 
+ Container mongodb-homework-init-1 Started 
+ Container mongodb-homework-init-1 Waiting 
+ Container mongodb-homework-init-1 Exited 
+ Container mongodb-homework-lab-run-c5afc8ae7034 Creating 
+ Container mongodb-homework-lab-run-c5afc8ae7034 Created 
+
+RUN failover
+{
+  "dataset": "2026-10-05",
+  "startedAt": {
+    "$date": "2026-10-17T17:47:53.091Z"
+  },
+  "server": "8.0.30"
+}
+PASS 3 data-bearing nodes ready
+PASS first majority write acknowledged
+
+ROLES BEFORE
+[
+  {
+    "host": "m1:27017",
+    "role": "SECONDARY"
+  },
+  {
+    "host": "m2:27017",
+    "role": "PRIMARY"
+  },
+  {
+    "host": "m3:27017",
+    "role": "SECONDARY"
+  }
+]
+
+FIRST WRITE
+{
+  "acknowledged": true,
+  "insertedId": "before",
+  "matchedCount": 0,
+  "modifiedCount": 0,
+  "upsertedCount": 1
+}
+PASS primary actually changed
+PASS same client instance
+PASS old majority document read
+PASS new majority write acknowledged
+PASS both documents present
+
+ROLES AFTER
+[
+  {
+    "host": "m1:27017",
+    "role": "PRIMARY"
+  },
+  {
+    "host": "m2:27017",
+    "role": "SECONDARY"
+  },
+  {
+    "host": "m3:27017",
+    "role": "SECONDARY"
+  }
+]
+
+READ OLD DOCUMENT
+{
+  "_id": "before",
+  "message": "majority confirmed before stepDown"
+}
+
+NEW WRITE
+{
+  "acknowledged": true,
+  "insertedId": "after",
+  "matchedCount": 0,
+  "modifiedCount": 0,
+  "upsertedCount": 1
+}
+
+COMPLETE failover
+{
+  "passed": 7,
+  "results": "results/results.json"
+}

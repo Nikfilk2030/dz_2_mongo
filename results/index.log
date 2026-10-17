@@ -1,0 +1,68 @@
+ Container mongodb-homework-m3-1 Running 
+ Container mongodb-homework-m1-1 Running 
+ Container mongodb-homework-m2-1 Running 
+ Container mongodb-homework-m1-1 Waiting 
+ Container mongodb-homework-m2-1 Waiting 
+ Container mongodb-homework-m3-1 Waiting 
+ Container mongodb-homework-m3-1 Healthy 
+ Container mongodb-homework-m1-1 Healthy 
+ Container mongodb-homework-m2-1 Healthy 
+ Container mongodb-homework-init-1 Starting 
+ Container mongodb-homework-init-1 Started 
+ Container mongodb-homework-init-1 Waiting 
+ Container mongodb-homework-init-1 Exited 
+ Container mongodb-homework-lab-run-879982503aaf Creating 
+ Container mongodb-homework-lab-run-879982503aaf Created 
+
+RUN index
+{
+  "dataset": "2026-10-05",
+  "startedAt": {
+    "$date": "2026-10-17T17:47:50.905Z"
+  },
+  "server": "8.0.30"
+}
+PASS 10000 documents
+PASS only _id index initially
+PASS same IDs and order
+PASS matches independent fixture order
+PASS before scans collection + SORT
+PASS after uses IXSCAN without SORT
+PASS examines fewer documents
+
+INDEX
+{
+  "filter": {
+    "userId": 2500,
+    "status": "paid"
+  },
+  "sort": {
+    "createdAt": -1,
+    "_id": 1
+  },
+  "index": {
+    "userId": 1,
+    "status": 1,
+    "createdAt": -1,
+    "_id": 1
+  },
+  "hint": false,
+  "before": {
+    "nReturned": 20,
+    "totalKeysExamined": 0,
+    "totalDocsExamined": 10000,
+    "hasSORT": true
+  },
+  "after": {
+    "nReturned": 20,
+    "totalKeysExamined": 20,
+    "totalDocsExamined": 20,
+    "hasSORT": false
+  }
+}
+
+COMPLETE index
+{
+  "passed": 7,
+  "results": "results/results.json"
+}

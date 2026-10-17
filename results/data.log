@@ -1,0 +1,206 @@
+ Container mongodb-homework-m3-1 Running 
+ Container mongodb-homework-m1-1 Running 
+ Container mongodb-homework-m2-1 Running 
+ Container mongodb-homework-init-1 Running 
+ Container mongodb-homework-m2-1 Waiting 
+ Container mongodb-homework-m3-1 Waiting 
+ Container mongodb-homework-m1-1 Waiting 
+ Container mongodb-homework-m1-1 Healthy 
+ Container mongodb-homework-m2-1 Healthy 
+ Container mongodb-homework-m3-1 Healthy 
+ Container mongodb-homework-init-1 Waiting 
+ Container mongodb-homework-init-1 Exited 
+ Container mongodb-homework-lab-run-47c47992dc59 Creating 
+ Container mongodb-homework-lab-run-47c47992dc59 Created 
+
+RUN data
+{
+  "dataset": "2026-10-05",
+  "startedAt": {
+    "$date": "2026-10-17T17:47:48.377Z"
+  },
+  "server": "8.0.30"
+}
+PASS validator strict/error installed
+PASS validation valid
+PASS validation string-price
+PASS validation negative-stock
+PASS complete product documents clothes/L/2
+PASS search clothes/L/2
+PASS complete product documents clothes/M/5
+PASS search clothes/M/5
+PASS complete product documents accessories/L/3
+PASS search accessories/L/3
+PASS complete product documents clothes/L/99
+PASS search clothes/L/99
+PASS L=2 includes A
+PASS complete history documents
+PASS history 20 IDs including date ties
+PASS history other user
+PASS history other status
+PASS history no matches
+PASS report top 5 amounts/order/names
+PASS empty interval
+PASS from included
+PASS catalog price does not rewrite revenue
+
+REPORT: [2026-01-01, 2026-02-01), paid
+[
+  {
+    "sku": "A",
+    "name": "Футболка",
+    "qty": 3,
+    "revenue": "320.00"
+  },
+  {
+    "sku": "B",
+    "name": "Рубашка",
+    "qty": 4,
+    "revenue": "320.00"
+  },
+  {
+    "sku": "C",
+    "name": "Толстовка",
+    "qty": 3,
+    "revenue": "270.00"
+  },
+  {
+    "sku": "D",
+    "name": "Ремень",
+    "qty": 2,
+    "revenue": "240.00"
+  },
+  {
+    "sku": "E",
+    "name": "Сумка",
+    "qty": 1,
+    "revenue": "200.00"
+  }
+]
+
+REPORT: empty interval
+{
+  "from": {
+    "$date": "2024-01-01T00:00:00Z"
+  },
+  "to": {
+    "$date": "2024-02-01T00:00:00Z"
+  },
+  "rows": []
+}
+
+REPORT: included from boundary
+{
+  "from": {
+    "$date": "2026-01-01T00:00:00Z"
+  },
+  "to": {
+    "$date": "2026-01-01T00:00:00.001Z"
+  },
+  "rows": [
+    {
+      "qty": 4,
+      "revenue": {
+        "$numberDecimal": "320.00"
+      },
+      "sku": "B",
+      "name": "Рубашка"
+    },
+    {
+      "qty": 2,
+      "revenue": {
+        "$numberDecimal": "200.00"
+      },
+      "sku": "A",
+      "name": "Футболка"
+    }
+  ]
+}
+
+REPORT: after catalog price change
+{
+  "from": {
+    "$date": "2026-01-01T00:00:00Z"
+  },
+  "to": {
+    "$date": "2026-02-01T00:00:00Z"
+  },
+  "changedProduct": {
+    "sku": "A",
+    "price": {
+      "$numberDecimal": "999.00"
+    }
+  },
+  "rows": [
+    {
+      "qty": 3,
+      "revenue": {
+        "$numberDecimal": "320.00"
+      },
+      "sku": "A",
+      "name": "Футболка"
+    },
+    {
+      "qty": 4,
+      "revenue": {
+        "$numberDecimal": "320.00"
+      },
+      "sku": "B",
+      "name": "Рубашка"
+    },
+    {
+      "qty": 3,
+      "revenue": {
+        "$numberDecimal": "270.00"
+      },
+      "sku": "C",
+      "name": "Толстовка"
+    },
+    {
+      "qty": 2,
+      "revenue": {
+        "$numberDecimal": "240.00"
+      },
+      "sku": "D",
+      "name": "Ремень"
+    },
+    {
+      "qty": 1,
+      "revenue": {
+        "$numberDecimal": "200.00"
+      },
+      "sku": "E",
+      "name": "Сумка"
+    }
+  ]
+}
+
+HISTORY: userId=2500, status=paid
+[
+  "H24",
+  "H25",
+  "H22",
+  "H23",
+  "H20",
+  "H21",
+  "H18",
+  "H19",
+  "H16",
+  "H17",
+  "H14",
+  "H15",
+  "H12",
+  "H13",
+  "H10",
+  "H11",
+  "H08",
+  "H09",
+  "H06",
+  "H07"
+]
+
+COMPLETE data
+{
+  "passed": 22,
+  "results": "results/results.json"
+}
